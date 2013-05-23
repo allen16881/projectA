@@ -77,7 +77,7 @@ class MySQL extends Grammar {
 			// types to the correct types.
 			$sql = $this->wrap($column).' '.$this->type($column);
 
-			$elements = array('unsigned', 'nullable', 'defaults', 'incrementer');
+			$elements = array('unsigned', 'zerofill', 'nullable', 'defaults', 'incrementer');
 
 			foreach ($elements as $element)
 			{
@@ -99,9 +99,24 @@ class MySQL extends Grammar {
 	 */
 	protected function unsigned(Table $table, Fluent $column)
 	{
-		if ($column->type == 'integer' && ($column->unsigned || $column->increment))
+		if ($column->type == 'integer' && ($column->unsigned || $column->increment || $column->zerofill))
 		{
 			return ' UNSIGNED';
+		}
+	}
+
+	/**
+	 * Get the SQL syntax for indicating if a column is zerofill.
+	 *
+	 * @param  Table   $table
+	 * @param  Fluent  $column
+	 * @return string
+	 */
+	protected function zerofill(Table $table, Fluent $column)
+	{
+		if ($column->type == 'integer' && ($column->zerofill))
+		{
+			return ' ZEROFILL';
 		}
 	}
 
@@ -338,7 +353,7 @@ class MySQL extends Grammar {
 	 */
 	protected function type_integer(Fluent $column)
 	{
-		return 'INT';
+		return 'INT('.$column->length.')';
 	}
 
 	/**
