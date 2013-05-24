@@ -4,7 +4,7 @@
 <!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 	<head>
 		<meta charset="utf-8">
-		<title>Login | Huraga Bootstrap Admin Template</title>
+		<title>Login</title>
 		<meta name="description" content="">
 		<meta name="robots" content="index, follow">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,35 +31,36 @@
 				{{ Form::open() }}
 					<!-- check for login errors flash var -->
 					@if (Session::has('login_errors'))
-						<span class="error">用户名或者密码错误</span>
+						<span class="error">__('account.login_username_password_error')</span>
 					@endif
 					<!-- username field -->
 					<fieldset>
 						<div class="control-group">
-							<label class="control-label" for="login">邮箱</label>
+							<label class="control-label" for="login">{{__('account.email')}}</label>
 							<div class="controls">
-								{{ Form::input('text', 'email', '', array('placeholder'=>'邮箱')) }}
+								{{ Form::input('text', 'email', '', array('placeholder'=>__('account.email'))) }}
 							</div>
 						</div>
 						<!-- password field -->
 						<div class="control-group">
-							<label class="control-label" for="login">密码</label>
+							<label class="control-label" for="login">{{__('account.password')}}</label>
 							<div class="controls">
-								{{ Form::input('password', 'password', '', array('placeholder'=>'密码')) }}
+								{{ Form::input('password', 'password', '', array('placeholder'=>__('account.password'))) }}
 								<label class="checkbox">
-									<input id="optionsCheckbox" type="checkbox" value="option1"> 记住我
+									<input id="optionsCheckbox" type="checkbox" value="option1"> {{__('account.remember_me')}}
 								</label>
 							</div>
 						</div>
 						<!-- submit button -->
 						<div class="form-actions">
-							{{ Form::submit('登 录',array('class'=>'btn btn-large btn-inverse btn-alt')) }}
+							{{ Form::submit( __('account.login') ,array('class'=>'btn btn-large btn-inverse btn-alt')) }}
 						</div>
 					</fieldset>
 				{{ Form::close() }}
 				
 			</div>
-			<p><a href="#" class="pull-right"><small>Password reset</small></a></p>
+			<p><a href="#" class="pull-right"><small>{{__('account.password_reset')}}</small></a></p>
+			<p><a href="#" class="pull-left"><small>{{__('account.signup')}}</small></a></p>
 			
 		</section>
 		<!-- /Main page container -->
