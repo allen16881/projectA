@@ -30,37 +30,32 @@
 			<div class="data-block">
 				{{ Form::open() }}
 					<!-- check for login errors flash var -->
-					@if (Session::has('login_errors'))
-						<span class="error">__('account.login_username_password_error')</span>
+					@if (Session::has('reset_error'))
+						<span class="error">{{__('account.reset_username_email_error')}}</span>
 					@endif
 					<!-- username field -->
 					<fieldset>
 						<div class="control-group">
-							<label class="control-label" for="login">{{__('account.email')}}</label>
+							<label class="control-label" for="login">{{__('account.username')}}</label>
 							<div class="controls">
-								{{ Form::input('text', 'email', '', array('placeholder'=>__('account.email'))) }}
+								{{ Form::input('text', 'username', Input::old('username'), array('placeholder'=>__('account.username'))) }}
 							</div>
 						</div>
-						<!-- password field -->
 						<div class="control-group">
-							<label class="control-label" for="login">{{__('account.password')}}</label>
+							<label class="control-label" for="login">{{__('account.email')}}</label>
 							<div class="controls">
-								{{ Form::input('password', 'password', '', array('placeholder'=>__('account.password'))) }}
-								<label class="checkbox">
-									<input id="optionsCheckbox" type="checkbox" value="option1"> {{__('account.remember_me')}}
-								</label>
+								{{ Form::input('text', 'email', Input::old('email'), array('placeholder'=>__('account.email'))) }}
 							</div>
 						</div>
 						<!-- submit button -->
 						<div class="form-actions">
-							{{ Form::submit( __('account.login') ,array('class'=>'btn btn-large btn-inverse btn-alt')) }}
+							{{ Form::submit( __('account.password_reset') ,array('class'=>'btn btn-large btn-inverse btn-alt')) }}
 						</div>
 					</fieldset>
 				{{ Form::close() }}
-				
 			</div>
-			<p><a href="{{URL::to('account/reset')}}" class="pull-right"><small>{{__('account.password_reset')}}</small></a></p>
 			<p><a href="{{URL::to('account/signup')}}" class="pull-left"><small>{{__('account.signup')}}</small></a></p>
+			<p><a href="{{URL::to('account/login')}}" class="pull-right"><small>{{__('account.login')}}</small></a></p>
 			
 		</section>
 		<!-- /Main page container -->

@@ -43,10 +43,11 @@ class Account_Controller extends Base_Controller {
               ->with_input('except', array('password'));
     } else {
       $user = User::create(array(
+        'username' => Input::get('username'),
         'email' => Input::get('email'),
         'password' => Hash::make(Input::get('password')),
       ));
-      
+
       Event::fire('account.signup',array('user'=>$user));
 
       if ($user) {
@@ -67,5 +68,35 @@ class Account_Controller extends Base_Controller {
     Event::fire('account.logout',array('user'=>Auth::user()));
     Auth::logout();
     return Redirect::to(URL::home());
+  }
+
+  public function get_reset()
+  {     
+    return View::make('account.reset');
+  }
+
+  public function post_reset()
+  {
+    $email = Input::get('email');
+    $username = Input::get('username');
+    $user = User::where_email_and_username($email,$username)->first();
+    if ($user) {
+      $new_password = substr(md5(mt_rand()),0,8);
+      $user->password = Hash::make($new_password);
+      $user->save();
+      $result = Event::fire('account.reset', array('email'=>$email,'new_password'=>$new_password));
+      if ($result) {
+        return Redirect::to(URL::home());
+      }
+    } else {
+      return Redirect::to(URL::to_action('account.reset'))
+              ->with('reset_error',true)
+              ->with_input();
+    }        
+  }
+
+  public function get_dashboard()
+  {
+    return View::make('account.dashboard');
   }
 }

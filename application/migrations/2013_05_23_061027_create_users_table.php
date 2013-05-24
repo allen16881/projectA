@@ -6,7 +6,7 @@ class Create_Users_Table {
 	{
 		Schema::create('users', function($table) {
 			$table->increments('id');
-			$table->string('username',50)->nullable();
+			$table->string('username',50);
 			$table->string('email',100);
 			$table->string('password');
 			$table->date('created_on');

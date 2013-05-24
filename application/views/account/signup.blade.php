@@ -36,6 +36,12 @@
 					<!-- username field -->
 					<fieldset>
 						<div class="control-group">
+							<label class="control-label" for="signup">{{__('account.username')}}</label>
+							<div class="controls">
+								{{ Form::input('text', 'username', Input::old('username'), array('placeholder'=>__('account.username'))) }}
+							</div>
+						</div>
+						<div class="control-group">
 							<label class="control-label" for="signup">{{__('account.email')}}</label>
 							<div class="controls">
 								{{ Form::input('text', 'email', Input::old('email'), array('placeholder'=>__('account.email'))) }}
