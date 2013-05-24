@@ -16,9 +16,9 @@ return array(
 	'login_username_password_error' => '输入的用户名或密码错误',
 	'email'     										=> '邮箱',
 	'password'     									=> '密码',
+	'confirmed_password'						=> '确认密码',
 	'remember_me'     							=> '记住我',
 	'login'     										=> '登录',
 	'password_reset'								=> '密码重置',
 	'signup'												=> '注册',
-
 );

@@ -60,7 +60,7 @@
 				
 			</div>
 			<p><a href="#" class="pull-right"><small>{{__('account.password_reset')}}</small></a></p>
-			<p><a href="#" class="pull-left"><small>{{__('account.signup')}}</small></a></p>
+			<p><a href="{{URL::to('account/signup')}}" class="pull-left"><small>{{__('account.signup')}}</small></a></p>
 			
 		</section>
 		<!-- /Main page container -->

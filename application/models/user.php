@@ -4,12 +4,12 @@
 */
 class User extends Eloquent
 {
+	public static $timestamps = false;
 	public static $table = 'users';
 
 	public static function validate($input) {
 
     $rules = array(
-      'username'  => 'required|max:50',
       'email' => 'required|email|unique:users',
       'password' => 'required|confirmed',
     );

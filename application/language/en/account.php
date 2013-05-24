@@ -16,6 +16,7 @@ return array(
 	'login_username_password_error' => '&laquo; Previous',
 	'email'     										=> 'Email',
 	'password'     									=> 'Password',
+	'confirmed_password'						=> 'Confirmed Password',
 	'remember_me'     							=> 'Remember Me',
 	'login'     										=> 'Login',
 	'password_reset'								=> 'Paaword Reset',

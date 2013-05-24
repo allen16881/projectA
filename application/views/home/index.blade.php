@@ -21,6 +21,7 @@
 				<h2>Learn the terrain.</h2>
 
 				<p>
+					{{HTML::link_to_action('account/logout','Logout')}} <br />
 					You've landed yourself on our default home page. The route that
 					is generating this page lives at:
 				</p>
