@@ -42,13 +42,8 @@ class Account_Controller extends Base_Controller {
               ->with('signup_errors', $validation->errors->messages)
               ->with_input('except', array('password'));
     } else {
-      $user = User::create(array(
-        'username' => Input::get('username'),
-        'email' => Input::get('email'),
-        'password' => Hash::make(Input::get('password')),
-      ));
 
-      Event::fire('account.signup',array('user'=>$user));
+      $user = Event::fire('account.signup',array('user_data'=>Input::all()));
 
       if ($user) {
         Auth::attempt(array(
@@ -95,8 +90,51 @@ class Account_Controller extends Base_Controller {
     }        
   }
 
-  public function get_dashboard()
-  {
-    return View::make('account.dashboard');
+  public function get_settings()
+  {     
+    return View::make('account.settings');
+  }
+
+  public function post_settings()
+  {     
+    $email = Input::get('email');
+    $username = Input::get('username');
+    $user = Auth::user();
+    if ($email) {
+      $user->email = $email;
+    }
+    if ($username) {
+      $user->username = $username;
+    }
+    if ($user->save()) {
+      return Redirect::to(URL::to_action('account.settings'))
+              ->with('settings_success',true);
+    } else {
+      return Redirect::to(URL::to_action('account.settings'))
+              ->with('settings_error',true)
+              ->with_input();
+    }
+    
+  }
+
+  public function get_settings_password()
+  {     
+    return View::make('account.settings_password');
+  }
+
+  public function post_settings_password()
+  {     
+    $old_password = Input::get('old_password');
+    $new_password = Input::get('new_password');
+    $user = Auth::user();
+    if (Hash::check($old_password, $user->password)) {
+      $user->password = Hash::make($new_password);
+      $user->save();
+      return Redirect::to(URL::to_action('account.settings_password'))
+                ->with('settings_password_success',true);
+    } else {
+      return Redirect::to(URL::to_action('account.settings_password'))
+              ->with('settings_password_errors',__('account.invaild_old_password'));
+    }    
   }
 }

@@ -9,6 +9,7 @@ class Create_Users_Table {
 			$table->string('username',50);
 			$table->string('email',100);
 			$table->string('password');
+			$table->string('avatar')->default('img/assets/no_avatar.gif');
 			$table->date('created_on');
 			$table->date('updated_on');
 			$table->integer('invite_by_id')->nullable()->unsigned();

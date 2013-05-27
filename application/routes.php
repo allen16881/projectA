@@ -33,6 +33,7 @@
 */
 
 Route::controller(array('account'));
+Route::controller(array('dashboard'));
 
 Route::get('/', function()
 {
